@@ -5,9 +5,8 @@ const {
   updateProducts,
   deleteProducts,
   getProductsDetails,
-} = require("../../../LMS-project/Backend/controllers/Productscontroller");
-const { isAuthenticationUser, authorizedRole } = require("../../../newlms/backend/middleware/auth");
-
+} = require("../../../Newlms/backend/controllers/Productscontrollers");
+const { isAuthenticationUser, authorizedRole } = require("../../../Newlms/backend/middleware/auth");
 const Router = express.Router();
 
 Router.route("/products/new").post(createProduct);
