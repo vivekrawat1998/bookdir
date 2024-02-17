@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const user = require('../../../newlms/backend/modals/UserMoals');
 const catchAsync = require('./catcheasync'); // Correct the filename if needed
-const ErrorHandler = require('../../../newlms/backend/utils/errorhandler');
+const ErrorHandler = require('../../../Newlms/backend/utils/errorhandler');
 
 exports.isAuthenticationUser = catchAsync(async (req, res, next) => {
     console.log("Cookies:", req.cookies);

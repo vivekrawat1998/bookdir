@@ -6,34 +6,24 @@ const catcheasync = require("../middleware/catcheasync");
 // create Products
 
 exports.createProduct = catcheasync(async (req, res, next) => {
+  // Assuming you have the user ID available in req.user.id
   req.body.user = req.user.id;
 
-
   try {
-    // product.create is used for creating a product
     const product = await Product.create(req.body);
     res.status(200).json({
       success: true,
       product,
     });
   } catch (error) {
-    if (error.name === "ValidationError") {
-      const validationErrors = Object.values(error.errors).map(
-        (err) => err.message
-      );
-      res.status(400).json({
-        success: false,
-        error: "Validation error",
-        messages: validationErrors,
-      });
-    } else {
-      res.status(500).json({
-        success: false,
-        error: "Server error",
-      });
-    }
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      error: "Server error",
+    });
   }
 });
+
 
 exports.getAllProducts = catcheasync(async (req, res, next) => {
   let resultPerpage = 5;
@@ -61,25 +51,27 @@ exports.getAllProducts = catcheasync(async (req, res, next) => {
 
 exports.updateProducts = catcheasync(async (req, res, next) => {
   try {
-    let products = await Product.findById(req.params.id);
-    if (!products) {
-      return next(Errorhandler("product not found", 404));
+    let product = await Product.findById(req.params.id);
+    if (!product) {
+      return next(Errorhandler("Product not found", 404));
     }
-    products = await Product.findByIdAndUpdate(req.params.id, req.body, {
+    product = await Product.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
       useFindAndModify: false,
     });
     res.status(200).json({
       success: true,
-      products,
+      product,
     });
   } catch (error) {
+    console.error(error); // Log the error for debugging
     res.status(500).json({
       success: false,
-      error: "error",
+      error: 'Server error',
     });
   }
+  
 });
 
 exports.deleteProducts = catcheasync(async (req, res, next) => {

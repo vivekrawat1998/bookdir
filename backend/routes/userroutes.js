@@ -1,5 +1,5 @@
 const express = require("express");
-const { registerUser, forgotPassword, resetPassword,loginUser, logoutUser } = require("../../../newlms/backend/controllers/usercontroller");
+const { registerUser, forgotPassword, resetPassword,loginUser, logoutUser } = require("../../../Newlms/backend/controllers/usercontroller");
 
 
 const router = express.Router();

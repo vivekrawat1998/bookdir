@@ -40,7 +40,7 @@ const userSchema = new mongoose.Schema({
     default: "user",
   },
   resetPasswordToken: String,
-  resetPasswordExpire: Date,
+  resetPasswordExpires: Date,
 });
 
 //bcrypt is use for making our password in hash value so that anybody not can see the password including admin also .....
@@ -58,9 +58,9 @@ userSchema.pre("save", async function (next) {
 });
 
 //jwt tokens it is used for confirm to the server that he is the corrrect user it generate the token which we will save in the cookieparsor//
-
 userSchema.methods.getJWTToken = function () {
   // jwt token basically taking a payload and secret key the secret key is taken from dotenv file //
+  console.log("jwt token", process.env.JWT_SECRET)
   return JWTToken.sign({ id: this._id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES,
   });

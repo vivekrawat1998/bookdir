@@ -1,4 +1,4 @@
-const Errorhandler = require("../../../newlms/backend/utils/errorhandler");
+const Errorhandler = require("../../../Newlms/backend/utils/errorhandler");
 
 module.exports = (err, req, res, next) => {
     console.log('Error handler middleware:', err);

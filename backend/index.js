@@ -1,8 +1,17 @@
 // index.js
-const app = require('./app');
-const dotenv = require("dotenv");
+const app = require("../backend/app");
 const cors = require('cors');
 const connectDatabase = require("../backend/database/Database");
+const dotenv = require("dotenv");
+
+
+
+const result = dotenv.config({ path: '../backend/config/config.env' });
+if (result.error) {
+  console.error("Error loading environment variables:", result.error);
+  process.exit(1);
+}
+console.log("Environment variables loaded successfully.");
 
 console.log("Environment variables loaded successfully.");
 
@@ -21,8 +30,7 @@ connectDatabase()
     process.exit(1);
   });
 
-const PORT = process.env.PORT || 3000;
-
+const PORT = process.env.PORT
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on port http://localhost:${PORT}`);
