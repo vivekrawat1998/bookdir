@@ -3,7 +3,7 @@ const app = require("../backend/app");
 const cors = require('cors');
 const connectDatabase = require("../backend/database/Database");
 const dotenv = require("dotenv");
-
+const cookieParser = require("cookie-parser");
 
 
 const result = dotenv.config({ path: '../backend/config/config.env' });
@@ -17,7 +17,7 @@ console.log("Environment variables loaded successfully.");
 
 // Apply CORS middleware
 app.use(cors());
-
+app.use(cookieParser())
 console.log("Connecting to the database...");
 
 // Connect to the database

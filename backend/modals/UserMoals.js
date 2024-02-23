@@ -44,16 +44,17 @@ const userSchema = new mongoose.Schema({
 });
 
 //bcrypt is use for making our password in hash value so that anybody not can see the password including admin also .....
-userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) {
-    next();
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) {
+    return next();
   }
 
   try {
-    this.password = await bcrypt.hash(this.password, 5);
-    next();
+    const salt = await bcrypt.genSalt(10); // Choose the number of salt rounds (e.g., 10)
+    this.password = await bcrypt.hash(this.password, salt);
+    return next();
   } catch (error) {
-    next(error);
+    return next(error);
   }
 });
 

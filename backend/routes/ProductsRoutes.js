@@ -5,7 +5,7 @@ const {
   updateProducts,
   deleteProducts,
   getProductsDetails,
-} = require("../../../Newlms/backend/controllers/Productscontrollers");
+} = require("../../../bookdir/backend/controllers/Productscontrollers");
 const { isAuthenticationUser } = require("../middleware/auth");
 const Router = express.Router();
 

@@ -20,6 +20,9 @@ exports.registerUser = catchAsync(async (req, res, next) => {
 
     sendToken(user, 201, res);
   });
+
+
+  
   exports.loginUser = catchAsync(async (req, res, next) => {
     const { email, password } = req.body;
   
